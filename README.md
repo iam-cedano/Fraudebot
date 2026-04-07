@@ -9,9 +9,9 @@ Fraudebot is being developed due to the increase on online scams advertised most
 
 Why bothering to create a platform like this? When people have the courage to upload their experiences, their posts mostly don't have the impact that they must have. Most of the time other customers wouldn't be aware of the post if they don't explicitly search them and even when they do, Facebook's algorithm do not show them either the post do not contain the necessary inforamtion to link it with the scammer or simply just because.
 
-It's important to note the importance of [Estafabot] (https://www.facebook.com/estafabotmx), which is/was a project with the same objectives as this one. Sadly, the project stopped being developed for unknown reasons, its web and Whatsapp Bot were removed, even its domain name was expired (which I'm thinking to buy).
+It's important to note the importance of [Estafabot](https://www.facebook.com/estafabotmx), which is/was a project with the same objectives as this one. Sadly, the project stopped being developed for unknown reasons, its web and Whatsapp Bot were removed, even its domain name was expired (which I'm thinking to buy).
 
-## Set up the project with [Docker] (https://www.docker.com/)
+## Set up the project with [Docker](https://www.docker.com/)
 
 I'm a big fan of Docker, so to make the process easy, I uploaded a **docker-compose** YAML file, but before you do a ```docker-compose up -d```, you have to do certain steps before:
 
@@ -27,7 +27,7 @@ MYSQL_USER={account-name}
 MYSQL_PASSWORD={account-password}
 ```
 
-The project runs on MySQL version 8.0.37 (as of April 2026). You have to follow the image's [guidelines] (https://hub.docker.com/_/mysql).
+The project runs on MySQL version 8.0.37 (as of April 2026). You have to follow the image's [guidelines](https://hub.docker.com/_/mysql).
 
 
 ```.env.php.example
