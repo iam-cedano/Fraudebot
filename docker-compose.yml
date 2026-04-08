@@ -19,6 +19,8 @@ services:
       - fraudebot-api-network
     env_file:
       - ./docker/php/.env.php
+    ports:
+      - 9000:9000
 
   web:
     image: nginx:alpine
