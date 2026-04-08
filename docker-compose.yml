@@ -6,7 +6,6 @@ services:
       context: .
       dockerfile: docker/php/Dockerfile
     image: laravel-clean-app
-    container_name: laravel_app
     restart: unless-stopped
     working_dir: /var/www/backend
     volumes:
@@ -23,7 +22,6 @@ services:
 
   web:
     image: nginx:alpine
-    container_name: laravel_web
     restart: unless-stopped
     ports:
       - "8000:80"
@@ -35,7 +33,6 @@ services:
 
   frontend:
     image: node:20-alpine
-    container_name: react_frontend
     working_dir: /app
     volumes:
       - ./frontend:/app
@@ -47,7 +44,6 @@ services:
 
   db:
     image: mysql:8.0
-    container_name: mysql_db
     restart: unless-stopped
     env_file:
       - ./docker/db/.env.db
@@ -61,7 +57,6 @@ services:
 
   redis:
     image: redis:alpine
-    container_name: redis_cache
     restart: unless-stopped
     ports:
       - 6379:6379
