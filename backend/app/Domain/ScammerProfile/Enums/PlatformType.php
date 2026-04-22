@@ -2,7 +2,7 @@
 
 namespace App\Domain\ScammerProfile\Enums;
 
-enum SocialMediaType: int
+enum PlatformType: int
 {
     case WHATSAPP = 1;
     case FACEBOOK = 2;
@@ -11,4 +11,5 @@ enum SocialMediaType: int
     case EMAIL = 5;
     case CELLPHONE = 6;
     case TELEGRAM = 7;
+    case INSTAGRAM = 8;
 }
