@@ -1,63 +1,82 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import Header from "@presentation/shared/components/Header";
 import Footer from "@presentation/shared/components/Footer";
-import LottieAnimation from "@presentation/shared/components/LottieAnimation";
-import RobotLottieAnimation from "@presentation/assets/robot.lottie";
 import SearchContainer from "@presentation/pages/search/components/SearchContainer";
 import { useDependencies } from "@/presentation/providers/DependencyProvider";
+import ScammerEntity from "@/domain/scammer/entities/scammer.entity";
+import Loader from "@/presentation/pages/search/components/Loader";
+import LookupForm from "@presentation/pages/search/components/LookupForm";
 
 function Search() {
-    const [searchParams] = useSearchParams();
-    const { searchScammerUseCase } = useDependencies();
-    const query = searchParams.get("q");
+  const [searchParams, setSearchParams] = useSearchParams();
+  const [isSearching, setIsSearching] = useState(false);
+  const [scammers, setScammers] = useState<ScammerEntity[]>([]);
+  const { searchScammerUseCase } = useDependencies();
+  
+  const query = searchParams.get("q");
+  
+  useEffect(() => {
+    if (!query || query.trim() === "") {
+      return;
+    }
+    
+    setIsSearching(true);
 
-    useEffect(() => {
-        if (!query || query.trim() === "") {
-            return;
-        }
+    searchScammerUseCase
+      .execute(query)
+      .then((res) => setScammers(res))
+      .finally(() => setIsSearching(false));
 
-        searchScammerUseCase.execute(query).then((data) => {
-            console.log(data);
-        }).catch((error) => {
-            if (error?.name === "AbortError" || error?.name === "CanceledError" || error?.code === "ERR_CANCELED") {
-                console.log("Search cancelled");
-                return;
-            }
-            console.error("Search failed", error);
-        });
+    return () => {
+      searchScammerUseCase.cancel();
+    };
+  }, []);
+  
+  const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const newQuery = event.target.value;
 
-        return () => {
-            searchScammerUseCase.cancel();
-        };
-    }, [query, searchScammerUseCase]);
+    setSearchParams({ q: newQuery });
+  }
 
-    return (
-        <>
-        <title>FraudeBot - Buscando</title>
+  const handleSubmit = async () => {
+    if (!query || query.trim() === "") {
+      setIsSearching(false);
+      setScammers([]);
+      
+      return;
+    }
+    
+    setIsSearching(true);
+    
+    try {
+      const scammers = await searchScammerUseCase.execute(query);
+
+      setScammers(scammers);
+    } catch (error) {
+      console.error("Error searching scammers:", error);
+    } finally {
+      setIsSearching(false);
+    }
+  }
+
+  return (
+    <>
+      <title>FraudeBot - Buscando</title>
+
+      <Header />
+
+      <SearchContainer>
         
-        <Header />
+        {isSearching && <Loader />}
 
-        <SearchContainer>
-            
-            <div className="grow flex flex-col items-center justify-center">
-                <div className="flex flex-col items-center gap-8">
-                    <div className="w-64 h-64 bg-gray-50 flex items-center justify-center rounded-lg">
-                        <LottieAnimation src={RobotLottieAnimation} />
-                    </div>
+        {!isSearching && <LookupForm defaultQuery={query} onSubmit={handleSubmit} onInputChange={handleInputChange} />}
 
-                    <p className="text-[#6b7280] text-2xl font-[Nunito] text-center">
-                        Buscando información, espere unos segundos
-                    </p>
-                </div>
-            </div>
+      </SearchContainer>
 
-        </SearchContainer>
-
-        <Footer />
-
-        </>
-);
+      <Footer />
+    </>
+  );
 }
 
 export default Search;
