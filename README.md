@@ -6,8 +6,10 @@
 </p>
 
 ---
-  **Lider de proyecto**: [https://www.linkedin.com/feed/](Oscar Noel Cedano Beltran)
-  **Facebook**: [https://www.facebook.com/profile.php?id=61570676484882](Página oficial)
+
+  **Lider de proyecto**: [Oscar Noel Cedano Beltran](https://www.linkedin.com/in/oscarced/)
+  **Facebook**: [Página Oficial]https://www.facebook.com/profile.php?id=61570676484882)
+
 ---
 
 Fraudebot es una plataforma con la cual los usuarios pueden buscar si un vendedor ha sido reportado como estafador.
