@@ -8,7 +8,7 @@
 ---
 
   **Lider de proyecto**: [Oscar Noel Cedano Beltran](https://www.linkedin.com/in/oscarced/)
-  **Facebook**: [Página Oficial]https://www.facebook.com/profile.php?id=61570676484882)
+  **Facebook**: [Página Oficial](https://www.facebook.com/profile.php?id=61570676484882)
 
 ---
 
