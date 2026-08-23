@@ -45,6 +45,7 @@ services:
     environment:
       HOME: /tmp
       NPM_CONFIG_CACHE: /tmp/.npm
+      VITE_API_BASE_URL: http://localhost:9000/api
     volumes:
       - ../frontend:/app
       - fraudebot-frontend-node-modules:/app/node_modules
